@@ -1,29 +1,35 @@
 #include <iostream>
 
-// C++ Best Practices for Developers
-// Link: https://www.linkedin.com/learning/c-plus-plus-best-practices-for-developers/challenge-writing-an-integer-sum-method
-// 3-6 - Chalenge
-// write an integer sum method using variadic methods. It sums all the provided values.
-// only needs to work with integers.
-
-// returns final value.
-int summer(int v)
-{
-	return v;
-}
-
-// variadic template function.
-template<typename T, typename... Args>
-T summer(T first, Args... args)
-{
-	return summer(args...) + first;
-}
+#include "CppBestPractices.h"
 
 // main function
 int main()
 {
-	int result = summer(1, 2, 3, 4, 5);
+	std::cout << "C++ Best Practices\n*****************" << std::endl;
+	
+	// sums values
+	int result = cpp_best_prac::summer(1, 2, 3, 4, 5);
 	std::cout << "summer(): " << result << std::endl;
+
+	// writes to file.
+	std::cout << "writeCountFile(): ";
+	if (cpp_best_prac::writeCountFile())
+		std::cout << "Success" << std::endl;
+	else
+		std::cout << "Failure" << std::endl;
+
+	// create and destroy class
+	{
+		// create
+		std::cout << std::endl;
+		cpp_best_prac::raii temp(1);
+
+		// new line
+		std::cout << std::endl;
+
+		// destroy
+	}
+	std::cout << std::endl;
 
 	system("pause");
 	return 0;
