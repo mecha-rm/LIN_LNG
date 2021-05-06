@@ -6,7 +6,10 @@ namespace LIN_LNG_CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            LearnCsharp.HelloWorld();
+
+            // LearnCsharp.Challenge1(); // survey
+            LearnCsharp.Challenge2(); // passcode
         }
     }
 }
