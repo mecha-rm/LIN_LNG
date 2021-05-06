@@ -6,10 +6,13 @@ namespace LIN_LNG_CSharp
     {
         static void Main(string[] args)
         {
-            LearnCsharp.HelloWorld();
+            // start
+            // LearnCsharp.HelloWorld();
 
             // LearnCsharp.Challenge1(); // survey
-            LearnCsharp.Challenge2(); // passcode
+            // LearnCsharp.Challenge2(); // passcode
+            // LearnCsharp.Challenge3(); // count up and down
+            LearnCsharp.Challenge4(); // student manager
         }
     }
 }
