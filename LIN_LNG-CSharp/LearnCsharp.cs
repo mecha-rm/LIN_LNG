@@ -5,8 +5,83 @@ using System.Text;
 
 namespace LIN_LNG_CSharp
 {
+    
+
+    // Main Class
     class LearnCsharp
     {
+        private class Survey // survey class (Challenge 5)
+        {
+            private string name;
+            private int age;
+            private string birthMonth;
+
+            // properties
+            // name
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            // age
+            public int Age
+            {
+                get { return age; }
+                set { age = value; }
+            }
+
+            // birth month
+            public string BirthMonth
+            {
+                get { return birthMonth; }
+                set { birthMonth = value; }
+            }
+
+            // empty constructor
+            public Survey()
+            {
+                name = "";
+                age = 0;
+                birthMonth = "";
+            }
+
+            // initialize values
+            public Survey(string name, int age, string birthMonth)
+            {
+                this.name = name;
+                this.age = age;
+                this.birthMonth = birthMonth;
+            }
+
+            // prints data
+            public void PrintData()
+            {
+                // print results
+                Console.WriteLine("Name: {0}", name);
+                Console.WriteLine("Age: " + age);
+                Console.WriteLine("Birth Month: " + birthMonth);
+
+                // prints zodiac sign (doesn't account for different letter cases, or most months).
+                if (birthMonth == "march")
+                {
+                    Console.WriteLine("You are an Aries");
+                }
+                else if (birthMonth == "april")
+                {
+                    Console.WriteLine("You are a Taurus");
+                }
+                else if (birthMonth == "may")
+                {
+                    Console.WriteLine("You are a Gemini");
+                }
+            }
+        }
+
+
+        /////////////////////
+
+
         // prints hello world (or input)
         public static void HelloWorld()
         {
@@ -20,7 +95,7 @@ namespace LIN_LNG_CSharp
         {
             Console.WriteLine("\nChallenge 1 - Multiple Choice");
 
-            // ask for name, age, and birht month, then print them.
+            // ask for name, age, and birth month, then print them.
             string name, age, birthMonth;
             
             Console.Write("What is your name? ");
@@ -44,7 +119,7 @@ namespace LIN_LNG_CSharp
             }
             else if(birthMonth == "april")
             {
-                Console.WriteLine("You are an Taurus");
+                Console.WriteLine("You are a Taurus");
             }
             else if(birthMonth == "may")
             {
@@ -122,44 +197,98 @@ namespace LIN_LNG_CSharp
         public static void Challenge4()
         {
             // ask for student number count.
+            int studentCount;
 
             // get student name and grade from console input.
-            string name = "X", grade = "A";
+            string name, grade;
 
             // lists of values
-            List<string> names = new List<string>();
-            List<string> grades = new List<string>();
+            string[] names;
+            string[] grades;
 
             // fourth challenge
             Console.WriteLine("\nChallenge 4");
 
-            // while the name is not blank.
-            while (name != "")
+            // gets the student count.
+            Console.Write("Enter number of students being entered: ");
+            studentCount = int.Parse(Console.ReadLine());
+
+            names = new string[studentCount];
+            grades = new string[studentCount];
+
+            // gets each student
+            for(int i = 0; i < studentCount; i++)
             {
-                Console.Write("Enter the Student's Name: ");
+                // enters the values.
+                Console.Write("Enter Student {0}'s Name: ", i + 1);
                 name = Console.ReadLine();
 
-                // done entering students
-                if (name == "")
-                    break;
-
-                Console.Write("Enter the Student's Grade: ");
+                Console.Write("Enter Student {0}'s Grade: ", i + 1);
                 grade = Console.ReadLine();
 
-                names.Add(name);
-                grades.Add(grade);
+                // saves the name and grade.
+                names[i] = name;
+                grades[i] = grade;
 
-
-                Console.WriteLine("\n");
+                // new line
+                Console.WriteLine("");
             }
 
             Console.WriteLine("\nPrinting Content");
 
             // prints values
-            for(int i = 0; i < names.Count; i++)
+            for(int i = 0; i < studentCount; i++)
             {
-                Console.WriteLine("Name: {0}, Grade: {1}", names[i], grades[i]);
+                Console.WriteLine("Student {0} - Name: {1}, Grade: {2}", i + 1, names[i], grades[i]);
             }
+        }
+
+        
+        // asks a question and gets a resposne
+        public static string Ask(string question, bool endLine = false)
+        {
+            // provided string
+            string response;
+            
+            // checks to see if a whole line should be used.
+            switch(endLine)
+            {
+                case true: // writes and ends the line
+                    Console.WriteLine(question);
+                    break;
+
+                case false: // writes line but does not end it.
+                    Console.Write(question);
+                    break;
+            }
+
+            // reads the line
+            response = Console.ReadLine();
+
+            // returns the response.
+            return response;
+        }
+
+        // 2-8: survey with custom class
+        public static void Challenge5()
+        {
+            Console.WriteLine("\nChallenge 5 - Survey");
+
+            // ask for name, age, and birth month, then print them.
+            Survey survey = new Survey();
+
+            Console.Write("What is your name? ");
+            survey.Name = Console.ReadLine();
+
+            Console.Write("What is your age? ");
+            survey.Age = int.Parse(Console.ReadLine());
+
+            Console.Write("What month were you born? ");
+            survey.BirthMonth = Console.ReadLine();
+
+            // print data
+            Console.WriteLine();
+            survey.PrintData();
         }
     }
 }
