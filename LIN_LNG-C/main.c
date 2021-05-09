@@ -7,6 +7,9 @@
 #include<math.h> // the math header
 #include<string.h>
 
+#define PI 3.14159F
+#define ARR_DOU_SIZE 10
+
 // prototypes
 void printHelloWorld(); // including void in the brackets is optional.
 
@@ -362,6 +365,165 @@ int main()
 		printf("\nResult: \n");
 		puts(strx);
 		printf("\n");
+	}
+
+	// single arrays
+	{
+		// note: using a constant variable to set the size doesn't work.
+		// you need to use a macro or enum constant to set the size.
+		const int SIZE = 10;
+
+		
+		int arrInt[] = { 0, 1, 2, 3, 4, 5 };
+		double arrDou[ARR_DOU_SIZE] = { 32.2F, -12.0F, 4.1F };
+		float arrFlt[3] = {1.21, 4.42, 52.1};
+		char arrStr[] = "This is a string array."; // automatically adds null char (\0) to the end
+		char arrChr[] = { 'C', 'h', 'a', 'r', '\0' }; // requires the null char (\0) to be added manually.
+
+		// sizeof(arr);
+
+		// sizeof returns the size in bytes of the data.
+		// for string and char arrays, it includes the null character.
+		//	- e.g. the sizeof the string "cat" would return 4, because it is actually ('c', 'a', 't', '\0').
+		// to get the length, divide it by the sizeof the data type itself (e.g. sizeof(arrInt) / sizeof(int)).
+
+		printf("\nArray Sizeofs:\n******\n");
+		printf("\nInt: %d", sizeof(arrInt));
+		printf("\nDouble: %d", sizeof(arrDou));
+		printf("\nFloat: %d", sizeof(arrFlt));
+		printf("\nString: %d", sizeof(arrStr));
+		printf("\nChar: %d", sizeof(arrChr));
+		printf("\n");
+	}
+
+	// multi-dimentional arrays
+	{
+		// 2D array
+		int grid[3][3] =
+		{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9}
+		};
+
+
+		// print values
+		printf("\n");
+
+		// row and column
+		// row
+		for (int row = 0; row < 3; row++)
+		{
+			printf("[");
+
+			// column
+			for (int col = 0; col < 3; col++)
+			{
+				printf("%d", grid[row][col]);
+
+				// seperators
+				if (col < 2)
+					printf(", ");
+			}
+
+			printf("]\n");
+		}
+
+		
+		// 2D array of strings
+		// remember to leave space for null termination character (\0)
+		char pets[4][5] =
+		{
+			"Cat",
+			"Dog",
+			"Newt",
+			"Fish",
+		};
+		
+		// change 'cat' to 'car'
+		pets[0][2] = 'r';
+
+		// you reference the strings using only the single dimension array notation.
+		printf("\n");
+		for (int i = 0; i < 4; i++)
+		{
+			printf("%s\n", pets[i]);
+		}
+
+		// array of fruits
+		// the amount of columns needs to be specified
+		// the amount of rows does not.
+		char fruits[][10] =
+		{
+			"Apple",
+			"Banana",
+			"Orange"
+		};
+	}
+
+	// 4_9 - Challenge 9 - Add a dimension to an array
+	{
+		// added the word elephant and changed the size accordingly.
+		char animals[][10] = 
+		{
+			"Lion",
+			"Tiger",
+			"Bear",
+			"Elephant"
+		};
+	}
+
+	// structure
+	{
+		// the bank struct
+		struct bank
+		{
+			char name[32];
+			int account;
+			float balance;
+		};
+
+		// creating the bank object
+		struct bank checking = { "John", 31, 21.5F };
+		struct bank savings;
+
+		// you can't use the assignment operator (=) to set a char array...
+		// after initialization. You must use fgets or a string copy function...
+		// in order to set the value.
+		{
+			char name[] = "Jessica";
+			strcpy_s(savings.name, sizeof(savings.name), name);
+		}
+
+		savings.account = 34;
+		savings.balance = 241.13F;
+
+		// you cannot forward declare tructs.
+		// date of birth
+		struct dateOfBirth
+		{
+			int year, month, day;
+		};
+
+		// person
+		// struct contains another struct.
+		struct person
+		{
+			char name[32];
+			int age;
+			struct dateOfBirth birth;
+		};
+
+	}
+
+	// variables
+	{
+		int x;
+		int y = 5;
+		int z = 10;
+
+		// use %p as placeholder
+		// use &value to get memory location
 	}
 
 	return 0;
