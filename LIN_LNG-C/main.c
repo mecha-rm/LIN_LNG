@@ -7,6 +7,9 @@
 #include<math.h> // the math header
 #include<string.h>
 
+// user defined files
+#include "Car.h";
+
 #define PI 3.14159F
 #define ARR_DOU_SIZE 10
 
@@ -18,6 +21,13 @@ int subtract(int, int);
 
 // 3-13 - Challenge 7 - check value relative to 10
 void evaluate(int);
+
+// reduces value by 10
+void minus10(int*);
+
+// capitalizes all chars in a string
+// this doesn't need to return anything, but it does.
+char* toUpperAll(char*, int);
 
 
 // hello world
@@ -54,6 +64,27 @@ void evaluate(int x)
 	{
 		printf("\n%d is equal to 10.", x);
 	}
+}
+
+// subtracts a value by 10.
+void minus10(int* value)
+{
+	*value = *value - 10;
+}
+
+// sends all to upper
+char* toUpperAll(char* input, int len)
+{
+	char* ptr = input;
+
+	// capitalizes all elements
+	for (int i = 0; i < len; i++)
+	{
+		*ptr = toupper(*ptr);
+		ptr = ptr + 1;
+	}
+
+	return input;
 }
 
 int main()
@@ -336,36 +367,36 @@ int main()
 
 
 	// 4_4 - Challenge  8
-	{
-		// storage strings
-		char str1[32], str2 [32];
-		
-		// combined strings
-		char strx[128];
-
-		// challenge 8
-		printf("\nChallege 8\n************\n");
-
-		
-		// fgets
-		// fgets is for reading in lines for a file, but it can be used for string input too.
-		// this cuts off early if you provided more data than it can store.
-		printf("\nEnter string 1 (31 chars max): ");
-		fgets(str1, 32, stdin);
-
-		printf("\nEnter string 2 (31 chars max): ");
-		fgets(str2, 32, stdin);
-
-		puts("\nString provided: ");
-
-		strcpy_s(strx, sizeof(strx), str1); // copies first string from start of destination.
-		strcat_s(strx, sizeof(strx), str2); // copies second string to end of data at destination.
-
-		// prints result
-		printf("\nResult: \n");
-		puts(strx);
-		printf("\n");
-	}
+	// {
+	// 	// storage strings
+	// 	char str1[32], str2 [32];
+	// 	
+	// 	// combined strings
+	// 	char strx[128];
+	// 
+	// 	// challenge 8
+	// 	printf("\nChallege 8\n************\n");
+	// 
+	// 	
+	// 	// fgets
+	// 	// fgets is for reading in lines for a file, but it can be used for string input too.
+	// 	// this cuts off early if you provided more data than it can store.
+	// 	printf("\nEnter string 1 (31 chars max): ");
+	// 	fgets(str1, 32, stdin);
+	// 
+	// 	printf("\nEnter string 2 (31 chars max): ");
+	// 	fgets(str2, 32, stdin);
+	// 
+	// 	puts("\nString provided: ");
+	// 
+	// 	strcpy_s(strx, sizeof(strx), str1); // copies first string from start of destination.
+	// 	strcat_s(strx, sizeof(strx), str2); // copies second string to end of data at destination.
+	// 
+	// 	// prints result
+	// 	printf("\nResult: \n");
+	// 	puts(strx);
+	// 	printf("\n");
+	// }
 
 	// single arrays
 	{
@@ -524,6 +555,186 @@ int main()
 
 		// use %p as placeholder
 		// use &value to get memory location
+		
+		printf("\n");
+		printf("\nx memory location: %p", &x);
+		printf("\nx value: %d", x);
+		printf("\ny memory location: %p", &y);
+		printf("\ny value: %d", y);
+		printf("\nz memory location: %p", &z);
+		printf("\nz value: %d", z);
+	}
+
+	// pointers
+	{
+		int val;
+		int* ptr;
+		int val2;
+		int* ptr2;
+
+		ptr = &val; // gets memory location
+		val = 35;
+		ptr2 = ptr;
+		val2 = *ptr;
+
+		printf("\n\nAddress of Ptr: %p", ptr);
+		printf("\nValue in Ptr: %d", *ptr);
+		printf("\nValue in Variable: %d", val);
+	}
+
+	// 5_4 - Challenge 10 - create a char pointer
+	{
+		// Step 1 - variables
+		char a, b, c;
+		char* p;
+
+		// assigning values
+		a = 'A'; // Step 2
+		p = &a; // Step 3
+		b = *p; // Step 4
+		p = &c; // Step 5
+		*p = 'Z'; // Step 6
+
+		printf("\n\nChallenge 10\n***********\n");
+		printf("\nA value: %c", a);
+		printf("\nB value: %c", b);
+		printf("\nC value: %c", c);
+		printf("\n");
+	}
+
+	
+	// pointers and array
+	{
+		int arr[] = { 3, 52, -42, 14 };
+		int* aptr;
+		int len = sizeof(arr) / sizeof(int);
+
+		aptr = arr; // array
+
+		// printf
+		printf("\nPrinting array data with pointer (length %d)", len);
+
+		// print each element
+		for (int i = 0; i < len; i++)
+		{
+			printf("\narr[%d] = %d", i, *aptr);
+			aptr++; // aptr = aptr + 1 is also valid.
+		}
+
+		// printing elements in reverse.
+		printf("\nPrinting in reverse.");
+
+		// print each element
+		for (int i = len - 1; i >= 0; i--)
+		{
+			aptr = aptr - 1; // aptr-- is also valid.
+			printf("\narr[%d] = %d", i, *aptr);
+		}
+	}
+
+	// pointer functions
+	{
+		int num = 24;
+
+		printf("\n\nNumber Bofre: %d", num);
+		minus10(&num);
+		printf("\nNumber Now: %d", num);
+
+		char str[5] = {"wolf"};
+		char* res; // returns cannot be put into arrays, but they can be put into pointers.
+
+		printf("\n\Word Bofore: %s", str);
+		res = toUpperAll(str, sizeof(str) / sizeof(char));
+		printf("\n\Word After: %s", str);
+	}
+
+	{
+		// storing strings in a pointer array
+		// this is more efficent than a 2D array, but editing the strings are difficult.
+		char* numbers[11] =
+		{
+			"Zero",
+			"One",
+			"Two",
+			"Three",
+			"Four",
+			"Five",
+			"Six",
+			"Seven",
+			"Eight",
+			"Nine",
+			"Ten"
+		};
+
+		printf("\n");
+
+		// shows each element
+		for (int i = 0; i < 11; i++)
+		{
+			printf("\nnumbers[%d] value: %s", i, numbers[i]);
+			printf("\nnumbers[%d] memory location: %p", i, numbers[i]);
+			printf("\n");
+		}
+	}
+
+	// malloc (manual memory allocation)
+	{
+		int intSize = sizeof(int);
+		int* intPtr;
+		
+		intPtr = malloc(intSize);
+
+		// int value
+		printf("\n");
+		if (intPtr == NULL)
+		{
+			printf("\nMemory allocation failure.");
+		}
+		else
+		{
+			printf("\nMemory allocation successful.");
+		
+			// puts data into allocated memory slot.
+			*intPtr = 10;
+
+			// print data
+			printf("\nMemory Location: %p", intPtr);
+			printf("\nValue Entered: %d", *intPtr);
+		}
+	}
+
+
+	// 5_10 - Challenge 11 - Hello Program
+	{
+		int allocSize = 64;
+		char* chrPtr;
+
+		chrPtr = malloc(allocSize);
+
+		// checks for valid memory
+		printf("\n");
+		if (chrPtr == NULL)
+		{
+			printf("\nHello unknown person (memory allocation failed).");
+		}
+		else
+		{
+			printf("\nMemory allocation successful.");
+			printf("\nEnter your name (no more than %d characters): ", allocSize - 1);
+
+			// gets the data and puts it into the chrPtr
+			fgets(chrPtr, allocSize, stdin);
+			printf("\Hello %s! Nice to meet you", chrPtr);
+		}
+	}
+
+
+	// EX: uses enements from another file
+	{
+		Car vec = { "Honda", 5, 1000.25F };
+		printf("\n\n");
+		CarToString(&vec);
+		printf("\n");
 	}
 
 	return 0;
