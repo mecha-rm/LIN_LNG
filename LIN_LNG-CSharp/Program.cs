@@ -20,7 +20,12 @@ namespace LIN_LNG_CSharp
 
             // CSharpDelsEvtsLbds
             {
-                CSharpDelsEvtsLbds.Demo();
+                // CSharpDelsEvtsLbds.Demo();
+            }
+
+            // CSharpIntrGenr
+            {
+                CSharpIntrGenr.Demo();
             }
 
         }
